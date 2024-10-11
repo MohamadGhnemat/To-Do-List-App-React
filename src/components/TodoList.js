@@ -43,8 +43,13 @@ const {todos,setTodos}=React.useContext(TodosContext);
 
 
   React.useEffect(() => {
-      const storageTodos=JSON.parse(localStorage.getItem("todos") ?? [])
+    try {
+      const storageTodos=JSON.parse(localStorage.getItem("todos") ?? "[]")
    setTodos( storageTodos)
+  } catch (error){
+    console.error("Error parsing todos from localstorage ", error)
+  
+  }
   },[])
   function changeDisplayedType(e) {
   // console.log(e.target.value)
