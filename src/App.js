@@ -3,9 +3,11 @@ import './App.css';
 import TodoList from './components/TodoList';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
-import { TodosContext, todosContext } from './contexts/TodosContext';
+import TodosProvider, { TodosContext, todosContext } from './contexts/TodosContext';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
+import MySnackBar from './components/MySnackBar';
+import {  ToastProvider } from './contexts/ToastContext';
 
 const theme = createTheme({
   typography: {
@@ -46,11 +48,17 @@ function App() {
   return (
   
 <ThemeProvider theme={theme}>
+  <TodosProvider>
+  <ToastProvider>
+ 
     <div className="App" style={{display:"flex",justifyContent:"center",minHeight:"100vh",background:"#191b1f",direction:"rtl"}}>
-    <TodosContext.Provider value={{todos,setTodos}}>
+   
+    {/* <TodosContext.Provider value={{todos,setTodos}}> */}
         <TodoList  />
-        </TodosContext.Provider>
+        {/* </TodosContext.Provider> */}
     </div>
+    </ToastProvider>
+    </TodosProvider>
     </ThemeProvider>
     
  
